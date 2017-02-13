@@ -17,10 +17,10 @@ class TodoList extends React.Component
                 <TableHeader displaySelectAll={false}
                     adjustForCheckbox={false}>
                     <TableRow>
+                        <TableHeaderColumn></TableHeaderColumn>
                         <TableHeaderColumn>Title</TableHeaderColumn>
                         <TableHeaderColumn>Due Date</TableHeaderColumn>
                         <TableHeaderColumn>Description</TableHeaderColumn>
-                        <TableHeaderColumn></TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
