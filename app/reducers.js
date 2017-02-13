@@ -12,6 +12,9 @@ function todolist(state = [], action)
             let postParams = Object.keys(action.target).map((key, value) => {
                 return encodeURIComponent(action.target[key].name) + '=' + encodeURIComponent(action.target[key].value);
             }).join('&');
+            let formParams = {
+                
+            };
 
             console.log(postParams);
 
