@@ -1,15 +1,15 @@
 import React from 'react';
 import TodoRow from './TodoRow';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import { connect } from 'react-redux';
 
 class TodoList extends React.Component
 {
-
     constructor()
     {
         super();
     }
-
+    
     render()
     {
         return(
@@ -27,10 +27,12 @@ class TodoList extends React.Component
                     {this.props.todolist.map((item) => {
                         return <TodoRow 
                             key={item._id}
+                            id={item._id}
                             title={item.title} 
                             duedate={item.duedate}
                             duetime={item.duetime}
-                            description={item.description} />
+                            description={item.description}
+                            />
                     })}
                 </TableBody>
             </Table>
@@ -38,4 +40,4 @@ class TodoList extends React.Component
     }
 };
 
-export default TodoList;
+export default connect()(TodoList);

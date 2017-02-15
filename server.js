@@ -72,11 +72,28 @@ router.route('/todos')
         });
     });
 
+router.route('/todos/:todo_id/completed')
+    .post( (req, res) => {
+        Todo.findById(req.params.todo_id, (err, todo) => {
+            if (err) {
+                res.send(err);
+            } else {
+                todo.completed = !todo.completed;
+                todo.save( (err) => {
+                    if(err) {
+                        res.send(err);
+                    } else {
+                        res.sendStatus(303);
+                    }
+                });
+            }
+        });
+    });
 router.route('/todos/:todo_id')
 
     // get the todo with that id (accessed at GET http://localhost:8080/api/todos/:todo_id)
     .get(function(req, res) {
-        Todo.findById(req.params.todo_id, function(err, todo) {
+        Todo.findById(req.params.todo_id, (err, todo) => {
             if (err)
                 res.send(err);
             res.json(todo);
@@ -86,7 +103,7 @@ router.route('/todos/:todo_id')
     // update the todo with this id (accessed at PUT http://localhost:8080/api/todos/:todo_id)
     .put(function(req, res) {
 
-        Todo.findById(req.params.todo_id, function(err, todo) {
+        Todo.findById(req.params.todo_id, (err, todo) => {
 
             if (err)
                 res.send(err);

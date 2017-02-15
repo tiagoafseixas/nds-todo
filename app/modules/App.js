@@ -10,6 +10,8 @@ import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
 
+import { connect } from 'react-redux';
+
 const API_URL = 'http://localhost:8080/api/';
 
 class App extends React.Component {
@@ -61,7 +63,7 @@ class App extends React.Component {
     }
 
     render() {
-        return( 
+        return(
             <MuiThemeProvider>
                 <Grid>
                     <Row>
@@ -85,4 +87,4 @@ class App extends React.Component {
     }
 };
 
-export default App;
+export default connect()(App)

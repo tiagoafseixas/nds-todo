@@ -4,6 +4,8 @@ import IconButton from 'material-ui/IconButton';
 import ActionAlarm from 'material-ui/svg-icons/action/alarm';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ActionDone from 'material-ui/svg-icons/action/done';
+import { deleteTodo } from '../actions';
+import { connect } from 'react-redux';
 
 class TodoRow extends React.Component
 {
@@ -17,7 +19,7 @@ class TodoRow extends React.Component
                     <IconButton tooltip="SVG Icon">
                         <ActionAlarm />
                     </IconButton>
-                    <IconButton tooltip="SVG Icon">
+                    <IconButton tooltip="SVG Icon" onClick={() => this.props.dispatch(deleteTodo(this.props.id))} >
                         <ActionDelete />
                     </IconButton>
                     <IconButton tooltip="SVG Icon">
@@ -29,8 +31,18 @@ class TodoRow extends React.Component
     }
 };
 
-TodoRow.propTypes = {
-    title: PropTypes.string.isRequired
+const mapStateToProps = (state, ownProps) => {
+    return {
+        
+    }
 };
 
-export default TodoRow;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        deleteFunction: () => {
+            dispatch(deleteTodo(ownProps.id));
+        }
+    }
+};
+
+export default connect()(TodoRow);
