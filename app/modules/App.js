@@ -21,8 +21,7 @@ class App extends React.Component {
         super();
 
         this.state = {
-            todolist: [],
-            currentTodo : {}
+            todolist: []
         };
 
         this.handleFormSubmit= this.handleFormSubmit.bind(this);

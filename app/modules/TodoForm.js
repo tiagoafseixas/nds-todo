@@ -6,6 +6,8 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
+import { addTodo } from '../actions';
+import { connect } from 'react-redux';
 
 class TodoForm extends React.Component
 {
@@ -27,12 +29,7 @@ class TodoForm extends React.Component
 
         this.formSubmit = this.formSubmit.bind(this);
         this.formReset = this.formReset.bind(this);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-    }
-
-    onChangeTitle(event)
-    {
-        this.setState({title:{value: event.target.value}});
+        this.formValidate = this.formValidate.bind(this);
     }
 
     formReset(event)
@@ -65,13 +62,15 @@ class TodoForm extends React.Component
     {
         event.preventDefault();
         if (this.formValidate(event)) {
-            this.props.onSubmit(event);
+            //this.props.onSubmit(event);
+            let m = event;
+            this.props.dispatch(addTodo(m));
         }
     }
 
     render()
     {
-        return (
+         return (
             <Card>
                 <CardHeader title={this.state.headerTitle} />
                 <Divider />
@@ -81,7 +80,6 @@ class TodoForm extends React.Component
                             hintText="Task Title" floatingLabelText="Title"
                             name="title" value={this.state.title.value}
                             errorText={this.state.title.errorMessage}
-                            onChange={this.onChangeTitle}
                         />
                         <DatePicker
                             hintText="Task Due Date" floatingLabelText="Due Date"
@@ -111,4 +109,24 @@ class TodoForm extends React.Component
     }
 };
 
-export default TodoForm;
+const mapStateToProps = (state, ownProps) =>
+{
+    return {
+    }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) =>
+{
+    return {
+        addTodo: (event, callback) => {
+            event.preventDefault();
+            console.log(event);
+            console.log(callback);
+            if(callback(event)) {
+                dispatch(addTodo(event));
+            }
+        }
+    }
+};
+
+export default connect()(TodoForm);
